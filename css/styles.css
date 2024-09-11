@@ -1,0 +1,163 @@
+/* Geral */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica;
+}
+
+:root {
+  --body_bg_color: #202124;
+  --border_color: #ccc;
+  --header_color: #fff;
+  --search_input_bg_color: #525356;
+  --search_input_color: #ddd;
+  --export_color: #fff;
+  --export_bg_notes: #333;
+  --note_btn: #555;
+  --fixed_bg: #3c3c3f;
+}
+
+body {
+  background-color: var(--body_bg_color);
+}
+
+/* Cabeçalho */
+header {
+  border-bottom: 1px solid var(--border_color);
+  padding: 1rem 2rem;
+  color: var(--header_color);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#search-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#search-input {
+  background-color: var(--search_input_bg_color);
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  color: var(--search_input_color);
+  width: 400px;
+}
+
+#search-input::placeholder {
+  color: var(--search_input_color);
+}
+
+#exports-notes {
+  background-color: var(--export_bg_notes);
+  border: 2px solid var(--export_color);
+  border-radius: 4px;
+  color: var(--export_color);
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+#exports-notes:hover {
+  background-color: var(--export_color);
+  color: var(--export_bg_notes);
+}
+
+/* Form de nova nota */
+#add-note-container {
+  display: flex;
+  width: 400px;
+  margin: 1rem auto 0;
+  gap: 1rem;
+}
+
+#add-note-container input,
+#add-note-container button {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#add-note-container input {
+  flex: 1;
+  background-color: transparent;
+  border: 1px solid var(--search_input_bg_color);
+  color: var(--export_color);
+}
+
+#add-note-container button {
+  cursor: pointer;
+  background-color: var(--export_bg_notes);
+  color: var(--export_color);
+}
+
+/* Notas */
+#notes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.note {
+  min-height: 200px;
+  padding: 1rem;
+  border: 1px solid var(--border_color);
+  background-color: var(--body_bg_color);
+  border-radius: 10px;
+  color: var(--export_color);
+  position: relative;
+}
+
+.note textarea {
+  background-color: transparent;
+  resize: none;
+  color: var(--export_color);
+  border: none;
+  height: 100%;
+  outline: none;
+}
+
+.note .bi-pin {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 1.2rem;
+  background-color: var(--export_bg_notes);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.note:hover > i {
+  opacity: 1;
+}
+
+.note .bi-x-lg,
+.note .bi-file-earmark-plus {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 0.9rem;
+  padding: 5px;
+  transition: 0.3s;
+  color: var(--note_btn);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.note .bi-file-earmark-plus {
+  top: 40px;
+}
+
+.note .bi-x-lg:hover,
+.note .bi-file-earmark-plus:hover {
+  color: var(--export_color);
+}
+
+.note.fixed {
+  background-color: var(--fixed_bg);
+}
