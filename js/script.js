@@ -46,20 +46,17 @@ function createNote(id, content, fixed) {
 
   // -----------------------
 
-  const pin = document.createElement("i");
-  pin.classList.add("bi");
-  pin.classList.add("bi-pin");
-  element.appendChild(pin);
+  const pinIcon = document.createElement("i");
+  pinIcon.classList.add(...["bi", "bi-pin"]);
+  element.appendChild(pinIcon);
 
-  const xLg = document.createElement("i");
-  xLg.classList.add("bi");
-  xLg.classList.add("bi-x-lg");
-  element.appendChild(xLg);
+  const xLgIcon = document.createElement("i");
+  xLgIcon.classList.add(...["bi", "bi-x-lg"]);
+  element.appendChild(xLgIcon);
 
-  const fileEarmarkPlus = document.createElement("i");
-  fileEarmarkPlus.classList.add("bi");
-  fileEarmarkPlus.classList.add("bi-file-earmark-plus");
-  element.appendChild(fileEarmarkPlus);
+  const fileEarmarkPlusIcon = document.createElement("i");
+  fileEarmarkPlusIcon.classList.add(...["bi", "bi-file-earmark-plus"]);
+  element.appendChild(fileEarmarkPlusIcon);
 
   // -------------------------
 
