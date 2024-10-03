@@ -1,7 +1,9 @@
 // Elementos
 const notesContainer = document.querySelector("#notes-container");
 const noteInput = document.querySelector("#note-content");
+const searchInput = document.querySelector("#search-input");
 const addNoteBtn = document.querySelector(".add-note");
+const exportBnt = document.querySelector("#export-notes");
 
 // Funções
 function showNotes() {
@@ -133,6 +135,42 @@ function updateNote(id, newContent) {
   saveNotes(notes);
 }
 
+function searchNotes(search) {
+  const searchResults = getNotes().filter((note) =>
+    note.content.includes(search)
+  );
+
+  if (search !== "") {
+    cleanNotes();
+
+    searchResults.forEach((note) => {
+      const noteElement = createNote(note.id, note.content);
+      notesContainer.appendChild(noteElement);
+    });
+
+    return;
+  }
+  cleanNotes();
+  showNotes();
+}
+
+function exportData() {
+  const notes = getNotes();
+
+  const csvString = [
+    ["ID", "Conteúdo", "Fixado?"],
+    ...notes.map((note) => [note.id, note.content, note.fixed]),
+  ]
+    .map((e) => e.join(","))
+    .join("\n");
+
+  const element = document.createElement("a");
+  element.href = "data:text/csv;charset=uft-8," + encodeURI(csvString);
+  element.target = "_blank";
+  element.download = "notes.csv";
+  element.click();
+}
+
 // Local storage
 function getNotes() {
   const notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -147,6 +185,22 @@ function saveNotes(notes) {
 
 // Eventos
 addNoteBtn.addEventListener("click", () => addNote());
+
+noteInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    addNote();
+  }
+});
+
+searchInput.addEventListener("keyup", (e) => {
+  const search = e.target.value;
+
+  searchNotes(search);
+});
+
+exportBnt.addEventListener("click", () => {
+  exportData();
+});
 
 // Inicialização
 showNotes();
